@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id 'xyz.jpenilla.run-paper' version '2.3.1'
+}
+
+layout.buildDirectory.set(layout.projectDirectory.dir('.build'))
+
+group = "dev.playtime"
+version = "SNAPSHOT"
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "papermc"
+        url = uri("https://repo.papermc.io/repository/maven-public/")
+    }
+}
+
+dependencies {
+    compileOnly "io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT"
+    implementation("com.mysql:mysql-connector-j:8.3.0")
+    implementation("com.zaxxer:HikariCP:5.1.0")
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+}
+
+tasks {
+    processResources {
+        filesMatching("plugin.yml") {
+            expand(['version': project.version])
+        }
+    }
+
+    jar {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        from({ configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } })
+
+        doLast {
+            def dest = file("../../plugins/")
+            dest.mkdirs()
+            dest.listFiles()?.each { f ->
+                if (f.name.startsWith("PlayerTime") && f.name.endsWith(".jar")) f.delete()
+            }
+            copy {
+                from archiveFile
+                into dest
+            }
+            println ">>> Plugin kopiert nach plugins/${archiveFileName.get()}"
+        }
+    }
+
+    compileJava {
+        options.encoding = "UTF-8"
+        options.release.set(21)
+    }
+
+    runServer {
+        minecraftVersion("1.21.11")
+        runDirectory.set(file("../run"))
+    }
+}

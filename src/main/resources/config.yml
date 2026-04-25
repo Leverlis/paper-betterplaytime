@@ -1,0 +1,22 @@
+# ──────────────────────────────────────────────
+#  Database Connection
+# ──────────────────────────────────────────────
+database:
+  url: "jdbc:mysql://<ipv4>:<port>/<database>"
+  username: "root"
+  password: ""
+  pool-size: 5
+
+# ──────────────────────────────────────────────
+#  Messages
+# ──────────────────────────────────────────────
+
+rate-limit-seconds: 3
+
+playtime:
+  own: "&6Deine Spielzeit &7➤ &e{time}"
+  other: "&6{player}'s Spielzeit &7➤ &e{time}"
+  not-found: "&cDer Spieler &l{player}&c wurde nicht gefunden."
+  no-data: "&cKeine Daten gefunden."
+  no-permission: "&cDu hast keine Berechtigung."
+  rate-limited: "&cBitte warte noch &l{remaining}s&c."

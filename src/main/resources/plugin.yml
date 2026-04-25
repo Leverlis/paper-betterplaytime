@@ -1,0 +1,15 @@
+name: PlayerTime
+version: '${version}'
+main: dev.playtime.PlayerTime
+api-version: '1.21'
+description: Playtime tracking plugin
+
+commands:
+  playtime:
+    description: Zeigt die Spielzeit an
+    usage: /playtime [Spieler]
+
+permissions:
+  dev.playtime.other:
+    description: Spielzeit anderer Spieler anzeigen
+    default: op
