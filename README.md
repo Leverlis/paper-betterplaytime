@@ -2,9 +2,8 @@
 
 **Spielzeit-Tracking Plugin für Paper mit MySQL-Anbindung**
 
-https://i.imgur.com/HCBJrTa.png
-![Minecraft](https://img.shields.io/badge/Minecraft-1.21.x-brightgreen?style=flat-square&logo=minecraft)
-![Paper](https://img.shields.io/badge/Paper-supported-blue?style=flat-square)
+![preview](https://i.imgur.com/HCBJrTa.png)
+
 
 ## Features
 
